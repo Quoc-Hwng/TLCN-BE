@@ -7,6 +7,7 @@ const brandRoute = require('./v1/brand.route')
 const newRoute = require('./v1/new.route')
 const oderRoute = require('./v1/oder.route')
 const cartRoute = require('./v1/cart.route')
+const reviewRoute = require('./v1/review.routes')
 
 const projectRouteUser = require('./v2/product.route')
 const cartRouteUser = require('./v2/cart.route')
@@ -48,6 +49,10 @@ const defaultRoutes = [
     {
         path: '/v1/cart',
         route: cartRouteUser,
+    },
+    {
+        path: '/v1/review',
+        route: reviewRoute,
     },
 ]
 
