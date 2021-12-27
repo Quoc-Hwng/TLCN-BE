@@ -51,6 +51,7 @@ reviewSchema.pre(/^find/, function (next) {
 //STATIC METHOD
 reviewSchema.statics.calcAverageRatings = async function (productId) {
     //tính các thông số cho 1 product đó
+    console.log(productId);
     const stats = await this.aggregate([
         {
             $match: { product: productId },
