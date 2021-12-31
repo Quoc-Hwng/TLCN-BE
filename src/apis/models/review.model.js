@@ -30,7 +30,15 @@ const reviewSchema = new mongoose.Schema(
         timeOrder: {
             type: Date,
             default: Date.now
-        }
+        },
+        state: {
+            type: String,
+            default: 'Chưa trả lời',
+            required: true,
+        },
+        adminReview: {
+            type: String
+        },
     },
     {
         toJSON: { virtuals: true },
@@ -51,7 +59,6 @@ reviewSchema.pre(/^find/, function (next) {
 //STATIC METHOD
 reviewSchema.statics.calcAverageRatings = async function (productId) {
     //tính các thông số cho 1 product đó
-    console.log(productId);
     const stats = await this.aggregate([
         {
             $match: { product: productId },

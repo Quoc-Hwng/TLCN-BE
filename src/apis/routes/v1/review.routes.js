@@ -13,7 +13,6 @@ router
         reviewController.setProductUserIds,
         reviewController.createReview,
     );
-
 router.route('/all').get(reviewController.getAllReviews);
 router.route('/:idproduct').get(reviewController.getAllReviewsIdProduct)
 router
@@ -25,6 +24,8 @@ router
     .delete(
         reviewController.deleteReview
     );
-
+router.route('/adminreview/:idReview').post(
+    reviewController.AddReviewofReview
+);
 //export for using in app
 module.exports = router;
