@@ -57,12 +57,19 @@ const deletes = async (id) => {
     }
     return discount.remove(discountBody)
 }
-
+const searchVC = async (code) => {
+    const discount = await Discount.find({code:code});
+    if (!discount) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'No Voucher existed')
+    }
+    return discount
+}
 
 module.exports = {
     creates,
     updates,
     deletes,
     view,
-    search
+    search,
+    searchVC
 }

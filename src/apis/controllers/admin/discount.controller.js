@@ -4,20 +4,13 @@ const { discountService } = require('../../services')
 const { Discount } = require('../../models')
 
 const add = catchAsync(async (req, res) => {
-    console.log(req.body)
-    try{
+
     const discount = await discountService.creates(req.body)
     res.status(httpStatus.CREATED).json({
         success: true,
         discount: discount
-    });
-    }catch(error){
-        return res.status(httpStatus.BAD_REQUEST).json({
-            success: false,
-            message: "Mã thương hiệu đã tồn tại",
-            error: error
-        })
-    }
+    })
+
 })
 const list = catchAsync(async (req, res) => {
     const page = req.query.page
@@ -31,6 +24,14 @@ const list = catchAsync(async (req, res) => {
 const search = catchAsync(async (req, res, next) => {
     const key = new RegExp(req.params.key)
     const List = await discountService.search(key)
+    res.status(httpStatus.OK).json({
+        success: true,
+        discount: List
+    });
+})
+const searchVC = catchAsync(async (req, res, next) => {
+    const code = (req.params.code)
+    const List = await discountService.search(code)
     res.status(httpStatus.OK).json({
         success: true,
         discount: List
@@ -79,11 +80,19 @@ const deletes = catchAsync(async (req, res, next) => {
         });
     })
 })
+const parinato = catchAsync(async (req, res) => {
+    const lengthOrigin = (await Discount.find()).length;
+    res.status(httpStatus.OK).json({
+        counts: lengthOrigin
+    });
+})
 module.exports = {
     add,
     view,
     deletes,
     edit,
     search,
-    list
+    list,
+    parinato,
+    searchVC
 }

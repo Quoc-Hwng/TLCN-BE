@@ -7,15 +7,23 @@ const { Cart } = require('../../models')
 const list = catchAsync(async (req, res, next) => {
     const page = req.query.page
     const size = req.query.size
-    const List = await cartService.list(page,size)
+    const key = new RegExp(req.params.key)
+    const List = await cartService.list(page,size,key)
     res.status(httpStatus.OK).json({
         success: true,
         cart: List
     });
 })
+const parinato = catchAsync(async (req, res) => {
+    const lengthOrigin = (await Cart.find({state: 'confimed'})).length;
+    res.status(httpStatus.OK).json({
+        counts: lengthOrigin
+    });
+})
 const search = catchAsync(async (req, res, next) => {
     const key =req.params.key
-    const list = await cartService.search(key)
+    const size = req.query.size
+    const list = await cartService.search(key,size)
     res.status(httpStatus.OK).json({
         success: true,
         cart: list
@@ -39,5 +47,6 @@ const view = catchAsync(async (req, res, next) => {
 module.exports = {
     list,
     search,
-    view
+    view,
+    parinato
 }

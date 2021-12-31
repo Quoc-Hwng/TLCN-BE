@@ -74,10 +74,9 @@ exports.AddReviewofReview = async (req, res) => {
 exports.getAllReviewState = async (req, res) => {
     try {
         const reviews = await Review.find({
-            state: "Chưa trả lời",
-        });
+            state: "Chưa trả lời"});
         res.status(200).json({
-            'status': 'success',
+            status: 'success',
             data: reviews,
         });
     }

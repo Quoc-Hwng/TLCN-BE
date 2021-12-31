@@ -1,6 +1,6 @@
 const express = require('express');
 const reviewController = require('../../controllers/client/review.controller');
-const authController = require('../../controllers/client/auth-controller');
+const {  reviewsController } = require('../../controllers')
 
 
 //Create router for review
@@ -28,4 +28,5 @@ router.route('/adminreview/:idReview').post(
     reviewController.AddReviewofReview
 );
 //export for using in app
+
 module.exports = router;

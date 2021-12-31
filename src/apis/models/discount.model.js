@@ -31,11 +31,6 @@ const discountSchema = mongoose.Schema(
             required: true,
             trim: true
         },
-        brand: {
-            type: String,
-            required: true,
-            trim: true
-        },
         discount: {
             type: Number,
             required: true,
